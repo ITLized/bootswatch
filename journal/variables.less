@@ -1,4 +1,4 @@
-// Journal 3.0.2
+// Journal 3.0.3
 // Variables
 // --------------------------------------------------
 
@@ -41,7 +41,7 @@
 
 @font-family-sans-serif:  "News Cycle", "Arial Narrow Bold", sans-serif;
 @font-family-serif:       Georgia, "Times New Roman", Times, serif;
-@font-family-monospace:   Monaco, Menlo, Consolas, "Courier New", monospace;
+@font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
 @font-family-base:        @font-family-serif;
 
 @font-size-base:          15px;
@@ -83,6 +83,9 @@
 
 @padding-small-vertical:         5px;
 @padding-small-horizontal:       10px;
+
+@padding-xs-vertical:            1px;
+@padding-xs-horizontal:          5px;
 
 @line-height-large:              1.33;
 @line-height-small:              1.5;
@@ -157,8 +160,8 @@
 @input-color-placeholder:        @gray-light;
 
 @input-height-base:              (@line-height-computed + (@padding-base-vertical * 2) + 2);
-@input-height-large:             (ceil(@font-size-large * @line-height-base) + (@padding-large-vertical * 2) + 2);
-@input-height-small:             (ceil(@font-size-small * @line-height-base) + (@padding-small-vertical * 2) + 2);
+@input-height-large:             (ceil(@font-size-large * @line-height-large) + (@padding-large-vertical * 2) + 2);
+@input-height-small:             (floor(@font-size-small * @line-height-small) + (@padding-small-vertical * 2) + 2);
 
 @legend-color:                   @text-color;
 @legend-border-color:            #e5e5e5;
@@ -185,8 +188,6 @@
 @dropdown-link-disabled-color:   @text-muted;
 
 @dropdown-header-color:          @text-muted;
-
-@dropdown-caret-color:           #000;
 
 
 // COMPONENT VARIABLES
@@ -246,8 +247,13 @@
 @grid-columns:              12;
 // Padding, to be divided by two and applied to the left and right of all columns
 @grid-gutter-width:         30px;
-// Point at which the navbar stops collapsing
+
+// Navbar collapse
+
+// Point at which the navbar becomes uncollapsed
 @grid-float-breakpoint:     @screen-sm-min;
+// Point at which the navbar begins collapsing
+@grid-float-breakpoint-max: (@grid-float-breakpoint - 1);
 
 
 // Navbar
@@ -267,16 +273,16 @@
 // Navbar links
 @navbar-default-link-color:                #000;
 @navbar-default-link-hover-color:          #000;
-@navbar-default-link-hover-bg:             transparent;
+@navbar-default-link-hover-bg:             darken(@navbar-default-bg, 6.5%);
 @navbar-default-link-active-color:         #000;
-@navbar-default-link-active-bg:            transparent;
+@navbar-default-link-active-bg:            darken(@navbar-default-bg, 6.5%);
 @navbar-default-link-disabled-color:       #ccc;
 @navbar-default-link-disabled-bg:          transparent;
 
 // Navbar brand label
 @navbar-default-brand-color:               @navbar-default-link-color;
 @navbar-default-brand-hover-color:         @navbar-default-link-hover-color;
-@navbar-default-brand-hover-bg:            transparent;
+@navbar-default-brand-hover-bg:            darken(@navbar-default-bg, 6.5%);
 
 // Navbar toggle
 @navbar-default-toggle-hover-bg:           #ddd;
@@ -294,16 +300,16 @@
 // Inverted navbar links
 @navbar-inverse-link-color:                 #fff;
 @navbar-inverse-link-hover-color:           #fff;
-@navbar-inverse-link-hover-bg:              transparent;
+@navbar-inverse-link-hover-bg:              darken(@navbar-inverse-bg, 6.5%);
 @navbar-inverse-link-active-color:          #fff;
-@navbar-inverse-link-active-bg:             transparent;
+@navbar-inverse-link-active-bg:             darken(@navbar-inverse-bg, 6.5%);
 @navbar-inverse-link-disabled-color:        #444;
 @navbar-inverse-link-disabled-bg:           transparent;
 
 // Inverted navbar brand label
 @navbar-inverse-brand-color:                @navbar-inverse-link-color;
 @navbar-inverse-brand-hover-color:          #fff;
-@navbar-inverse-brand-hover-bg:             transparent;
+@navbar-inverse-brand-hover-bg:             darken(@navbar-inverse-bg, 6.5%);
 
 // Inverted navbar toggle
 @navbar-inverse-toggle-hover-bg:            darken(@navbar-inverse-bg, 10%);
@@ -321,7 +327,6 @@
 @nav-disabled-link-hover-color:             @gray-light;
 
 @nav-open-link-hover-color:                 #fff;
-@nav-open-caret-border-color:               #fff;
 
 // Tabs
 @nav-tabs-border-color:                     #ddd;
@@ -515,20 +520,20 @@
 @panel-primary-heading-bg:    @brand-primary;
 
 @panel-success-text:          @state-success-text;
-@panel-success-border:        @state-success-border;
-@panel-success-heading-bg:    @state-success-bg;
+@panel-success-border:        @brand-success;
+@panel-success-heading-bg:    @brand-success;
 
 @panel-warning-text:          @state-warning-text;
-@panel-warning-border:        @state-warning-border;
-@panel-warning-heading-bg:    @state-warning-bg;
+@panel-warning-border:        @brand-warning;
+@panel-warning-heading-bg:    @brand-warning;
 
 @panel-danger-text:           @state-danger-text;
-@panel-danger-border:         @state-danger-border;
-@panel-danger-heading-bg:     @state-danger-bg;
+@panel-danger-border:         @brand-danger;
+@panel-danger-heading-bg:     @brand-danger;
 
 @panel-info-text:             @state-info-text;
-@panel-info-border:           @state-info-border;
-@panel-info-heading-bg:       @state-info-bg;
+@panel-info-border:           @brand-info;
+@panel-info-heading-bg:       @brand-info;
 
 
 // Thumbnails

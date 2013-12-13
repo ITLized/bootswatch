@@ -4,8 +4,18 @@
     <title>Bootswatch: Components</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../amelia/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="../amelia/bootstrap.css" media="screen" id="stylesheet">
     <link rel="stylesheet" href="../assets/css/bootswatch.min.css">
+    <style>
+
+        #menu {
+          z-index: 1040;
+          position:fixed;
+          top:10px;
+          right:10px;
+        }
+
+    </style>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="../bower_components/bootstrap/assets/js/html5shiv.js"></script>
@@ -42,6 +52,7 @@
                 <li><a tabindex="-1" href="../slate/">Slate</a></li>
                 <li><a tabindex="-1" href="../spacelab/">Spacelab</a></li>
                 <li><a tabindex="-1" href="../united/">United</a></li>
+                <li><a tabindex="-1" href="../yeti/">Yeti</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -76,8 +87,8 @@
     <div class="container">
 
       <div class="page-header">
-        <h1>Bootstrap</h1>
-        <p class="lead">The original</p>
+        <h1 id="theme">Amelia</h1>
+        <p id="description" class="lead">Sweet and cheery</p>
       </div>
 
 
@@ -2721,10 +2732,31 @@
 
     <script src="../bower_components/jquery/jquery.min.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
     <script src="../assets/js/bootswatch.js"></script>
     <script>
 
       $('[data-toggle=popover]').popover();
+
+      $.get("http://api.bootswatch.com/3/", function (data) {
+          var menuTemplate = "<div id='menu'><select>{{#.}}<option data-description='{{description}}'>{{name}}</option>{{/.}}</select></div>",
+              menuHTML = Mustache.render(menuTemplate, data.themes);
+
+          $('body').append(menuHTML);
+                        
+          $('#menu').change(function(){
+            var $theme = $('#menu :selected'),
+                theme = $theme.text(),
+                description = $theme.data('description'),
+                date = new Date(),
+                time = date.getTime()
+                url = '../' + theme.toLowerCase() + '/bootstrap.css?' + time;
+
+            $('#theme').text(theme);
+            $('#description').text(description);
+            $('#stylesheet').attr('href', url);
+          });
+      }, "json");
 
     </script>
   </body>
